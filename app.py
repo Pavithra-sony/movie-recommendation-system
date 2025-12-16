@@ -14,7 +14,7 @@ def load_movies_and_similarity():
     movies_df = pd.read_csv('cleaned_movies.csv')  # must be in repo
     # Compute TF-IDF matrix
     tfidf = TfidfVectorizer(stop_words='english')
-    tfidf_matrix = tfidf.fit_transform(movies_df['description'].fillna(''))  # adjust column name if needed
+    tfidf_matrix = tfidf.fit_transform(movies_df['genre'].fillna(''))  # adjust column name if needed
     similarity_matrix = cosine_similarity(tfidf_matrix)
     return movies_df, similarity_matrix
 
@@ -51,3 +51,4 @@ if st.button('Show Recommendation'):
     for col, name, poster in zip(cols, recommended_movie_names, recommended_movie_posters):
         col.text(name)
         col.image(poster, use_container_width=True)
+
